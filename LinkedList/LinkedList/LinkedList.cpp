@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "LinkedList.h"
+#include "Point.h"
 
 void ListInit(List* plist) {
 	plist->head = (Node*)malloc(sizeof(Node)); // 더미 노드 생성

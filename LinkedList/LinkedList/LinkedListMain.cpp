@@ -1,52 +1,72 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "LinkedList.h"
 
-int WhoIsPrecede(int d1, int d2) {
-	if (d1 < d2)
+int WhoIsPrecede(LData d1, LData d2) {
+	if (d1->xpos < d2->xpos)
 		return 0;
-	else
+	else if (d1->xpos == d2->xpos) {
+		if (d1->ypos < d2->ypos)
+			return 0;
+		else
+			return 1;
+	}
+	else 
 		return 1;
 }
 
 int main() {
 	List list;
-	int data;
+	LData data;
 	ListInit(&list);
 
 	SetSortRule(&list, WhoIsPrecede); // 정렬의 기준 등록
 
-	LInsert(&list, 11); LInsert(&list, 11);
-	LInsert(&list, 22); LInsert(&list, 22);
-	LInsert(&list, 33);
+	data = (LData)malloc(sizeof(Point));
+	SetPointPos(data, 1, 1);
+	LInsert(&list, data);
+	data = (LData)malloc(sizeof(Point));
+	SetPointPos(data, 1, 2); 
+	LInsert(&list, data);
+	data = (LData)malloc(sizeof(Point));
+	SetPointPos(data, 2, 2);
+	LInsert(&list, data); 
+	data = (LData)malloc(sizeof(Point));
+	SetPointPos(data, 2, 1);
+	LInsert(&list, data);
+	data = (LData)malloc(sizeof(Point));
+	SetPointPos(data, 3, 1);
+	LInsert(&list, data);
 
 	printf("현재 데이터의 수 : %d\n", LCount(&list));
 	// 데이터 전체 출력
 	if (LFirst(&list, &data)) {
-		printf("%d ", data);
+		ShowPointPos(data);
 
 		while (LNext(&list, &data)) {
-			printf("%d ", data);
+			ShowPointPos(data);
 		}
 	}
 	printf("\n\n");
-	// 22인 데이터 삭제
+	// xpos가 2인 데이터 삭제
 	if (LFirst(&list, &data)) {
-		if (data == 22)
+		if (data->xpos == 2)
 			LRemove(&list);
 
 		while (LNext(&list, &data)) {
-			if (data == 22)
+			if (data->xpos == 2)
 				LRemove(&list);
 		}
 	}
+	printf("\n\n");
 
 	printf("현재 데이터의 수 : %d\n", LCount(&list));
 	// 데이터 전체 출력
 	if (LFirst(&list, &data)) {
-		printf("%d ", data);
+		ShowPointPos(data);
 
 		while (LNext(&list, &data)) {
-			printf("%d ", data);
+			ShowPointPos(data);
 		}
 	}
 	printf("\n\n");
