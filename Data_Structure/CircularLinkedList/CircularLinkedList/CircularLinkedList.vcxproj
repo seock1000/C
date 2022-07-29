@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CLinkedList.h" />
+    <ClInclude Include="PersonInformation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLinkedList.cpp" />
     <ClCompile Include="CLinkedListMain.cpp" />
+    <ClCompile Include="PersonInformation.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

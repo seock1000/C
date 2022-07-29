@@ -63,6 +63,7 @@ int LNext(List* plist, Data* pdata) {
 }
 
 Data LRemove(List* plist) {
+	Node* rpos = plist->cur;
 	Data rdata = plist->cur->data;
 
 	if (plist->cur == plist->tail) {
@@ -75,6 +76,8 @@ Data LRemove(List* plist) {
 	plist->before->next = plist->cur->next;
 	plist->cur = plist->before;
 
+	RemoveInfo(rpos->data); // 동적할당된 Person형 변수 할당해제
+	free(rpos);
 	(plist->numOfData)--;
 	return rdata;
 }

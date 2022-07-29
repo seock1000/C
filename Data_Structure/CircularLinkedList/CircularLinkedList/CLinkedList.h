@@ -4,7 +4,9 @@
 #define TRUE 1
 #define FALSE 0
 
-typedef int Data;
+#include "PersonInformation.h"
+
+typedef Person* Data;
 
 typedef struct _node {
 	Data data;
