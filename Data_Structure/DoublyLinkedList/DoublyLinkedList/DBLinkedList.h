@@ -14,6 +14,7 @@ typedef struct _node {
 
 typedef struct _DLinkedList {
 	Node* head;
+	Node* tail;
 	Node* cur;
 	int numOfData;
 } DBLinkedList;
