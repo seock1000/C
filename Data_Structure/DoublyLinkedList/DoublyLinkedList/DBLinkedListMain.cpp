@@ -1,53 +1,76 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "DBLinkedList.h"
 
 int main() {
 	// 리스트 생성 및 초기화
 	List list;
-	int data;
+	Data data;
+	int mode;
 	ListInit(&list);
 
-	// 데이터 저장
-	LInsert(&list, 1); LInsert(&list, 2);
-	LInsert(&list, 3); LInsert(&list, 4);
-	LInsert(&list, 5); LInsert(&list, 6);
-	LInsert(&list, 7); LInsert(&list, 8);
+	do {
+		printf("1. 입력\n2. 삭제\n3. 전체 출력\n0. 종료\n");
+		printf("--------------------------------------\n");
+		printf("입력 : ");
+		scanf_s("%d", &mode);
+		switch (mode) {
+		
+		case 1:
+			int number;
+			char name[100];
+			printf("번호와 이름을 입력하세요.\n");
+			printf("번호 : ");
+			scanf_s("%d", &number);
+			printf("이름 : ");
+			scanf_s("%s", name, 100);
+			data = (Data)malloc(sizeof(Person));
+			setPersonInfo(data, name, number);
+			LInsert(&list, data);
+			break;
+		
+		case 2:
+			printf("삭제할 번호와 이름을 입력하세요.\n");
+			printf("번호 : ");
+			scanf_s("%d", &number);
+			printf("이름 : ");
+			scanf_s("%s", name, 100);
+			if (LFirst(&list, &data)) {
+				if (compPerson(data, name, number)) {
+					printPersonInfo(LRemove(&list));
+					printf("삭제 되었습니다.\n");
+				}
 
-	// 데이터 조회
-	if (LFirst(&list, &data)) {
-		printf("%d ", data);
+				while (LNext(&list, &data)) {
+					if (compPerson(data, name, number)) {
+						printPersonInfo(LRemove(&list));
+						printf("삭제 되었습니다.\n");
+					}
+				}
+			}
+			break;
+		
+		case 3:
+			if (LFirst(&list, &data)) {
+				printPersonInfo(data);
 
-		while(LNext(&list, &data))
-			printf("%d ", data);
+				while (LNext(&list, &data))
+					printPersonInfo(data);
 
-		while(LPrevious(&list, &data))
-			printf("%d ", data);
-
-		printf("\n\n");
-	}
-
-	// 2의 배수 삭제
-	if (LFirst(&list, &data)) {
-		if (data % 2 == 0)
-			LRemove(&list);
-
-		while (LNext(&list, &data))
-			if (data % 2 == 0)
-				LRemove(&list);
-	}
-
-	// 데이터 조회
-	if (LFirst(&list, &data)) {
-		printf("%d ", data);
-
-		while (LNext(&list, &data))
-			printf("%d ", data);
-
-		while (LPrevious(&list, &data))
-			printf("%d ", data);
-
-		printf("\n\n");
-	}
+				printf("\n\n");
+			}
+			break;
+		
+		case 0:
+			printf("프로그램을 종료합니다.\n");
+			break;
+		
+		default :
+			printf("잘못된 입력입니다.\n");
+			continue;
+		}
+	} while (mode != 0);
 
 	return 0;
 }

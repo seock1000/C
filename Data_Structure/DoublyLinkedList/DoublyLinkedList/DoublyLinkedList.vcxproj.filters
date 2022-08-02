@@ -18,12 +18,18 @@
     <ClInclude Include="DBLinkedList.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="PersonInfo.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DBLinkedList.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="DBLinkedListMain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonInfo.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

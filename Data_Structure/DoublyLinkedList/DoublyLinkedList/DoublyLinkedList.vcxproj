@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DBLinkedList.h" />
+    <ClInclude Include="PersonInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DBLinkedList.cpp" />
     <ClCompile Include="DBLinkedListMain.cpp" />
+    <ClCompile Include="PersonInfo.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

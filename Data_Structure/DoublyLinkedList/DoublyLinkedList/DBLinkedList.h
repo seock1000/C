@@ -1,10 +1,12 @@
 #ifndef __DB_LINKED_LIST_H__
 #define __DB_LINKED_LIST_H__
 
+#include "PersonInfo.h"
+
 #define TRUE 1
 #define FALSE 0
 
-typedef int Data;
+typedef Person* Data;
 
 typedef struct _node {
 	Data data;
