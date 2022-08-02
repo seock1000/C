@@ -54,6 +54,18 @@ int LPrevious(List* plist, Data* pdata) {
 	return TRUE;
 }
 
+Data LRemove(List* plist) {
+	Node* toDelete = plist->cur;
+	Data data = plist->cur->data;
+
+	plist->cur->prev->next = plist->cur->next;
+	plist->cur->next->prev = plist->cur->prev;
+	plist->cur = plist->cur->prev;
+
+	free(toDelete);
+	return data;
+}
+
 int LCount(List* plist) {
 	return plist->numOfData;
 }

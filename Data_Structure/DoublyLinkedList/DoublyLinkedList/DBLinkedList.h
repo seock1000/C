@@ -28,6 +28,7 @@ int LFirst(List* plist, Data* pdata);
 int LNext(List* plist, Data* pdata);
 int LPrevious(List* plist, Data* pdata);
 
+Data LRemove(List* plist); // Remove하는 경우 탐색은 LNext로만
 int LCount(List* plist);
 
 #endif
