@@ -62,6 +62,7 @@ Data LRemove(List* plist) {
 	plist->cur->next->prev = plist->cur->prev;
 	plist->cur = plist->cur->prev;
 
+	free(toDelete->data);
 	free(toDelete);
 	return data;
 }

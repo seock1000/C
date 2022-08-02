@@ -4,7 +4,7 @@ typedef struct _person {
 	int number;
 } Person;
 
-void setPersonInfo(Person* p, char* name, int number);
+Person* setPersonInfo(char* name, int number);
 int compPerson(Person* p, char* name, int number);
 void printPersonInfo(Person* p);
 

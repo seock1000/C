@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include "DBLinkedList.h"
 
@@ -25,9 +24,7 @@ int main() {
 			scanf_s("%d", &number);
 			printf("이름 : ");
 			scanf_s("%s", name, 100);
-			data = (Data)malloc(sizeof(Person));
-			setPersonInfo(data, name, number);
-			LInsert(&list, data);
+			LInsert(&list, setPersonInfo(name, number));
 			break;
 		
 		case 2:
@@ -38,13 +35,15 @@ int main() {
 			scanf_s("%s", name, 100);
 			if (LFirst(&list, &data)) {
 				if (compPerson(data, name, number)) {
-					printPersonInfo(LRemove(&list));
+					printPersonInfo(data);
+					LRemove(&list);
 					printf("삭제 되었습니다.\n");
 				}
 
 				while (LNext(&list, &data)) {
 					if (compPerson(data, name, number)) {
-						printPersonInfo(LRemove(&list));
+						printPersonInfo(data);
+						LRemove(&list);
 						printf("삭제 되었습니다.\n");
 					}
 				}

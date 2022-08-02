@@ -1,10 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "PersonInfo.h"
 
-void setPersonInfo(Person* p, char* name, int number) {
+Person* setPersonInfo(char* name, int number) {
+	Person* p = (Person*)malloc(sizeof(Person));
 	strcpy_s(p->name, name);
 	p->number = number;
+	
+	return p;
 }
 
 int compPerson(Person* p, char* name, int number) {
