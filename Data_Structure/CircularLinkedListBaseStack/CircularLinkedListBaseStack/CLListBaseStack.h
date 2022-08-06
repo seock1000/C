@@ -6,9 +6,11 @@
 
 #include "CLinkedList.h"
 
-typedef List CLListStack;
+typedef struct _listStack {
+	List* plist;
+} ListStack;
 
-typedef CLListStack Stack;
+typedef ListStack Stack;
 
 void StackInit(Stack* pstack);
 int SIsEmpty(Stack* pstack);

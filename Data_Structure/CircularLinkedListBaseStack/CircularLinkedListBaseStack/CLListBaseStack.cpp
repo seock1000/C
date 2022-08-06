@@ -4,40 +4,43 @@
 #include "CLinkedList.h"
 
 void StackInit(Stack* pstack) {
-	ListInit(pstack); // 스택을 빈 상태로 초기화
+	pstack->plist = (List*)malloc(sizeof(List));
+	ListInit(pstack->plist);
 }
 
 int SIsEmpty(Stack* pstack) {
-	Data data;
-	return !(LFirst(pstack, &data));
+	if (LCount(pstack->plist) == 0)
+		return TRUE;
+	else
+		return FALSE;
 }
 
 void SPush(Stack* pstack, Data data) {
-	LInsertFront(pstack, data);
+	LInsertFront(pstack->plist, data);
 }
 
 Data SPop(Stack* pstack) {
-	Data rdata;
+	Data data;
 
 	// 스택이 비었을 경우
-	if (!LFirst(pstack, &rdata)) {
+	if (!LFirst(pstack->plist, &data)) {
 		printf("Stack Memory Error!");
 		exit(-1);
 	}
 
-	LRemove(pstack);
+	LRemove(pstack->plist);
 
-	return rdata;
+	return data;
 }
 
 Data SPeek(Stack* pstack) {
-	Data rdata;
+	Data data;
 
 	// 스택이 비었을 경우
-	if (!LFirst(pstack, &rdata)) {
+	if (!LFirst(pstack->plist, &data)) {
 		printf("Stack Memory Error!");
 		exit(-1);
 	}
 
-	return rdata;
+	return data;
 }
