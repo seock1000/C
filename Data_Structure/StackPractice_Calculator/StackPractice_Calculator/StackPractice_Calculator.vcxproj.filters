@@ -24,12 +24,24 @@
     <ClCompile Include="ListBaseStack.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="PostCalculator.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="InfixCalculator.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InfixToPostfix.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="ListBaseStack.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PostCalculator.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="InfixCalculator.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

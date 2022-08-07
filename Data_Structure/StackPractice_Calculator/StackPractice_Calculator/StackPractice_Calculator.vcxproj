@@ -139,13 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="InfixCalculator.cpp" />
     <ClCompile Include="InfixToPostfix.cpp" />
     <ClCompile Include="CalculatorMain.cpp" />
     <ClCompile Include="ListBaseStack.cpp" />
+    <ClCompile Include="PostCalculator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="InfixCalculator.h" />
     <ClInclude Include="InfixToPostfix.h" />
     <ClInclude Include="ListBaseStack.h" />
+    <ClInclude Include="PostCalculator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
