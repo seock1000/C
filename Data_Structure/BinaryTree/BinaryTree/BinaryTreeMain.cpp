@@ -31,7 +31,11 @@ int main() {
 
 	printf("Postorder : ");
 	PostorderTraverse(bt1, ShowIntData);
-	printf("\n");
+	printf("\n\n");
+
+	printf("Delete sub tree bt2\n");
+	DeleteTree(bt2);
+	printf("Deletion Success!!\n\n");
 
 	return 0;
 }

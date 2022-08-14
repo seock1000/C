@@ -1,4 +1,5 @@
-#include "stdlib.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include "BinaryTree.h"
 
 // make new node's memory space
@@ -55,6 +56,16 @@ void MakeRightSubTree(BTreeNode* main, BTreeNode* sub) {
 	if (main->right != NULL) // right sub tree 존재하면 삭제
 		free(main->right);
 	main->right = sub;
+}
+
+void DeleteTree(BTreeNode* bt) {
+	if (bt == NULL)
+		return;
+	DeleteTree(bt->left);
+	DeleteTree(bt->right);
+
+	printf("delete data : %d\n", bt->data);
+	free(bt);
 }
 
 void PreorderTraverse(BTreeNode* bt, VisitFuncPtr action) {
