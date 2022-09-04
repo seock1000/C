@@ -9,13 +9,32 @@ void Swap(int arr[], int idx1, int idx2) {
 	arr[idx2] = temp;
 }
 
+void SelectMidValue(int arr[], int left, int right) {
+	int mid = (left + right) / 2;
+	if (arr[left] < arr[right]) {
+		if (arr[right] < arr[mid])
+			Swap(arr, left, right);
+		else if (arr[left] < arr[mid])
+			Swap(arr, left, mid);
+	}
+	else {
+		if (arr[right] > arr[mid])
+			Swap(arr, left, right);
+		else if (arr[left] > arr[mid])
+			Swap(arr, left, mid);
+	}
+}
+
 // seperate array to two area
 // input : array and first and last index of area to sort
 // output : index of pivot
 int Partition(int arr[], int left, int right) {
+	SelectMidValue(arr, left, right);
 	int pivot = arr[left];
 	int low = left + 1;
 	int high = right; // pivot과 low, high 설정
+
+	printf("pivot : %d \n", pivot);
 
 	while (low <= high) { // low와 high가 교차될 때까지
 		while (pivot >= arr[low] && low <= right) // low 이동
@@ -45,7 +64,7 @@ void QuickSort(int arr[], int left, int right) {
 }
 
 int main() {
-	int arr[7] = { 3, 2, 4, 1, 7, 6, 5 };
+	int arr[11] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 
 	int len = sizeof(arr) / sizeof(int);
 	int i;
