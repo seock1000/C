@@ -6,7 +6,7 @@
 
 #define HEAP_LEN 100
 
-typedef char HData;
+typedef int HData;
 // d1 < d2이면 0보다 큰 값, d1 > d2이면 0보다 작은 값, d1 == d2이면 0 반환
 typedef int (*PriorityComp)(HData d1, HData d2);
 
