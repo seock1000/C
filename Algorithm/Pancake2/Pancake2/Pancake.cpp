@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "../../../Data_Structure/UsefulHeap/UsefulHeap/UsefulHeap.h"
 
 int Comp(int n1, int n2) {
@@ -67,31 +68,52 @@ int main() {
 	int n, seqLen;
 	int cnt = 0;
 	int i;
+	int value = fgetc(fp);
 
-	HeapInit(&heap, Comp);
+	while (value != EOF) {
+		HeapInit(&heap, Comp);
+		cnt = 0;
 
-	for (;;) {
-		if (fscanf(fp, "%d", &n) == EOF)
-			break;
-		arr[cnt++] = n;
-		HInsert(&heap, n);
+		while (value != EOF && value != '\n') {
+			if (isdigit(value)) {
+				int nextValue = fgetc(fp);
+				if (isdigit(nextValue)) {
+					nextValue = fgetc(fp);
+					n = 10;
+				}
+				else
+					n = value - '0';
+				value = nextValue;
+				arr[cnt++] = n;
+				HInsert(&heap, n);
+			}
+			else
+				value = fgetc(fp);
+		}
+
+		if (value != EOF)
+			value = fgetc(fp);
+
+		for (i = 0; i < cnt; i++) {
+			printf("%d ", arr[i]);
+		}
+
+		seqLen = StackPancake(arr, sequence, &heap, cnt);
+
+		printf("(");
+		for (i = 0; i < cnt; i++) {
+			if (i == cnt - 1)
+				printf("%d", arr[i]);
+			else
+				printf("%d ", arr[i]);
+		}
+		printf(")\n");
+
+		for (i = 0; i < seqLen; i++)
+			printf("%d ", sequence[i]);
+
+		printf("\n");
 	}
-
-	for (i = 0; i < cnt; i++)
-		printf("%d ", arr[i]);
-
-	seqLen = StackPancake(arr, sequence, &heap, cnt);
-
-	printf("(");
-	for (i = 0; i < cnt; i++) {
-		printf("%d ", arr[i]);
-	}
-	printf(")\n");
-
-	for (i = 0; i < seqLen; i++)
-		printf("%d ", sequence[i]);
-
-	printf("\n");
 
 	fclose(fp);
 
