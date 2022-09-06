@@ -54,6 +54,8 @@ int StackPancake(int arr[], int sequence[], Heap* heap, int n) {
 	return cnt;
 }
 
+// 예외처리 추가
+
 int main() {
 	FILE* fp;
 

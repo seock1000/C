@@ -51,6 +51,8 @@ void StackPancake(int arr[], int sequen[], Heap* heap, int n) {
 	StackPancake(arr, sequen, heap, n - 1);
 }
 
+// 예외처리 추가하기
+
 int main() {
 	FILE* fp;
 
@@ -87,6 +89,9 @@ int main() {
 				value = fgetc(fp);
 		}
 
+		if (value != EOF)
+			value = fgetc(fp);
+
 		ARR_LEN = cnt;
 		
 		cntSequence = 0;
@@ -98,7 +103,10 @@ int main() {
 
 		printf("(");
 		for (i = 0; i < cnt; i++) {
-			printf("%d ", arr[i]);
+			if(i == cnt - 1)
+				printf("%d", arr[i]);
+			else
+				printf("%d ", arr[i]);
 		}
 		printf(")\n");
 
