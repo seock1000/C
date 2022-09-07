@@ -49,7 +49,7 @@ int main() {
 	int idx[100];
 
 	for (i = 0; i < 100; i++) {
-		printf("Please type age and score as integer(End : -1 -1) : ");
+		printf("Put age and score pair (End : -1 -1) : ");
 		scanf("%d %d", &age[i], &score[i]);
 		if (age[i] == -1 && score[i] == -1)
 			break;
@@ -62,19 +62,19 @@ int main() {
 	}
 
 	for (i = 0; i < FindMaxValueIdx(age, idx, cnt); i++) {
-		printf("Oldest Age = %d, Score = %d\n", age[idx[i]], score[idx[i]]);
+		printf("Oldest age(%d) score as %d\n", age[idx[i]], score[idx[i]]);
 	}
 
 	for (i = 0; i < FindMinValueIdx(age, idx, cnt); i++) {
-		printf("Youngest Age = %d, Score = %d\n", age[idx[i]], score[idx[i]]);
+		printf("Youngest age(%d) score as %d\n", age[idx[i]], score[idx[i]]);
 	}
 
 	for (i = 0; i < FindMaxValueIdx(score, idx, cnt); i++) {
-		printf("Highest Score = %d, Age = %d\n", score[idx[i]], age[idx[i]]);
+		printf("Max score(%d) age as %d\n", score[idx[i]], age[idx[i]]);
 	}
 
 	for (i = 0; i < FindMinValueIdx(score, idx, cnt); i++) {
-		printf("Lowest Score = %d, Age = %d\n", score[idx[i]], age[idx[i]]);
+		printf("Min score(%d), age as %d\n", score[idx[i]], age[idx[i]]);
 	}
 
 	return 0;
