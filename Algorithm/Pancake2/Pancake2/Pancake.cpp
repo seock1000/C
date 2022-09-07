@@ -65,45 +65,60 @@ int main() {
 	}
 
 	int arr[30];
+	char str[100] = {NULL,};
 	int sequence[100];
 	Heap heap;
 	int n, seqLen;
 	int cnt = 0;
 	int i;
-	int value = fgetc(fp);
 
-	while (value != EOF) {
+	while (fgets(str, 100, fp) != NULL) {
 		HeapInit(&heap, Comp);
 		cnt = 0;
+		int arrCnt = 0;
 
-		while (value != EOF && value != '\n') {
-			if (isdigit(value)) {
-				int nextValue = fgetc(fp);
-				if (isdigit(nextValue)) {
-					nextValue = fgetc(fp);
-					n = 10;
-				}
-				else
-					n = value - '0';
-				value = nextValue;
-				arr[cnt++] = n;
-				HInsert(&heap, n);
+		while (str[cnt] != ' ' && str[cnt] != '\n' && str[cnt] != NULL) {
+			char eleNum[100] = {NULL,};
+			int eleCnt = 0;
+			
+			while (isdigit(str[cnt])) {
+				eleNum[eleCnt] = str[cnt];
+				cnt++;
+				eleCnt++;
 			}
-			else
-				value = fgetc(fp);
+			if (str[cnt] != ' ' && str[cnt] != '\n' && str[cnt] != NULL) {
+				printf("Wrong Input!\n");
+				exit(-1);
+			}
+			else if(str[cnt] == ' ')
+				cnt++;
+			
+			n = 0;
+			int mul = 1;
+
+			while (eleCnt > 0) {
+				n += (eleNum[eleCnt - 1] - '0') * mul;
+				eleCnt--;
+				mul *= 10;
+			}
+
+			if (n > 10 || arrCnt > 30) {
+				printf("Wrong Input!\n");
+				exit(-1);
+			}
+
+			arr[arrCnt++] = n;
+			HInsert(&heap, n);
 		}
 
-		if (value != EOF)
-			value = fgetc(fp);
-
-		for (i = 0; i < cnt; i++) {
+		for (i = 0; i < arrCnt; i++) {
 			printf("%d ", arr[i]);
 		}
 
-		seqLen = StackPancake(arr, sequence, &heap, cnt);
+		seqLen = StackPancake(arr, sequence, &heap, arrCnt);
 
 		printf("(");
-		for (i = 0; i < cnt; i++) {
+		for (i = 0; i < arrCnt; i++) {
 			if (i == cnt - 1)
 				printf("%d", arr[i]);
 			else
