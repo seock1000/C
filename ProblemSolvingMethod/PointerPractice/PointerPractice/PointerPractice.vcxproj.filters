@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Pancake.cpp">
+    <ClCompile Include="PointerPractice.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

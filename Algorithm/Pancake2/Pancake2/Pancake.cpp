@@ -2,10 +2,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "../../../Data_Structure/UsefulHeap/UsefulHeap/UsefulHeap.h"
 
-int Comp(int n1, int n2) {
-	return n1 - n2;
+int FindMax(int arr[], int n) {
+	int max = arr[0];
+	
+	for (int i = 0; i <= n; i++) {
+		if (max < arr[i])
+			max = arr[i];
+	}
+
+	return max;
 }
 
 void FlipPancake(int arr[], int n) {
@@ -19,19 +25,23 @@ void FlipPancake(int arr[], int n) {
 	}
 }
 
-int StackPancake(int arr[], int sequence[], Heap* heap, int n) {
+int StackPancake(int arr[], int sequence[], int n) {
 	int key, i;
 	int arrLen = n;
 	int cnt = 0;
 	n = n - 1;
 
-	while (!HIsEmpty(heap)) {
-		key = HDelete(heap);
+	while (n >= 0) {
+		key = FindMax(arr, n);
 		if (n == 0) {
 			sequence[cnt++] = 0;
 			break;
 		}
-		if (arr[n] != key) {
+		if (arr[n] == key) {
+			n--;
+			continue;
+		}
+		else {
 			for (i = n - 1; i >= 0; i--) {
 				if (arr[i] == key) {
 					if (i == 0) {
@@ -47,14 +57,14 @@ int StackPancake(int arr[], int sequence[], Heap* heap, int n) {
 					}
 				}
 			}
+			n--;
 		}
-		n--;
 	}
 
 	return cnt;
 }
 
-int ChangeStringToArray(int arr[], char str[], Heap* heap) {
+int ChangeStringToArray(int arr[], char str[]) {
 	int cnt = 0;
 	int arrCnt = 0;
 	int n;
@@ -87,7 +97,6 @@ int ChangeStringToArray(int arr[], char str[], Heap* heap) {
 			return -1;
 
 		arr[arrCnt++] = n;
-		HInsert(heap, n);
 	}
 
 	return arrCnt;
@@ -104,15 +113,13 @@ int main() {
 	int arr[30];
 	char str[100] = {NULL,};
 	int sequence[100];
-	Heap heap;
 	int n, seqLen;
 	int cnt = 0;
 	int i;
 
 	while (fgets(str, 100, fp) != NULL) {
-		HeapInit(&heap, Comp);
 		
-		int arrCnt = ChangeStringToArray(arr, str, &heap);
+		int arrCnt = ChangeStringToArray(arr, str);
 
 		if (arrCnt == -1) {
 			printf("Wrong Input!\n");
@@ -123,11 +130,11 @@ int main() {
 			printf("%d ", arr[i]);
 		}
 
-		seqLen = StackPancake(arr, sequence, &heap, arrCnt);
+		seqLen = StackPancake(arr, sequence, arrCnt);
 
 		printf("(");
 		for (i = 0; i < arrCnt; i++) {
-			if (i == cnt - 1)
+			if (i == arrCnt - 1)
 				printf("%d", arr[i]);
 			else
 				printf("%d ", arr[i]);
@@ -141,6 +148,9 @@ int main() {
 	}
 
 	fclose(fp);
+
+//	getchar();
+//	system("pause > nul");
 
 	return 0;
 }

@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9d1f5e49-ca29-4c3f-8f6e-3fc44855ada7}</ProjectGuid>
-    <RootNamespace>Pancake2</RootNamespace>
+    <ProjectGuid>{03dd5604-4cc0-477e-965d-80dea8682820}</ProjectGuid>
+    <RootNamespace>PointerPractice</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Pancake.cpp" />
+    <ClCompile Include="PointerPractice.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
