@@ -54,7 +54,44 @@ int StackPancake(int arr[], int sequence[], Heap* heap, int n) {
 	return cnt;
 }
 
-// 예외처리 추가
+int ChangeStringToArray(int arr[], char str[], Heap* heap) {
+	int cnt = 0;
+	int arrCnt = 0;
+	int n;
+
+	while (str[cnt] != ' ' && str[cnt] != '\n' && str[cnt] != NULL) {
+		char eleNum[100] = { NULL, };
+		int eleCnt = 0;
+
+		while (isdigit(str[cnt])) {
+			eleNum[eleCnt] = str[cnt];
+			cnt++;
+			eleCnt++;
+		}
+		if (str[cnt] != ' ' && str[cnt] != '\n' && str[cnt] != NULL)
+			return -1;
+
+		else if (str[cnt] == ' ')
+			cnt++;
+
+		n = 0;
+		int mul = 1;
+
+		while (eleCnt > 0) {
+			n += (eleNum[eleCnt - 1] - '0') * mul;
+			eleCnt--;
+			mul *= 10;
+		}
+
+		if (n > 10 || arrCnt > 30)
+			return -1;
+
+		arr[arrCnt++] = n;
+		HInsert(heap, n);
+	}
+
+	return arrCnt;
+}
 
 int main() {
 	FILE* fp;
@@ -74,41 +111,12 @@ int main() {
 
 	while (fgets(str, 100, fp) != NULL) {
 		HeapInit(&heap, Comp);
-		cnt = 0;
-		int arrCnt = 0;
+		
+		int arrCnt = ChangeStringToArray(arr, str, &heap);
 
-		while (str[cnt] != ' ' && str[cnt] != '\n' && str[cnt] != NULL) {
-			char eleNum[100] = {NULL,};
-			int eleCnt = 0;
-			
-			while (isdigit(str[cnt])) {
-				eleNum[eleCnt] = str[cnt];
-				cnt++;
-				eleCnt++;
-			}
-			if (str[cnt] != ' ' && str[cnt] != '\n' && str[cnt] != NULL) {
-				printf("Wrong Input!\n");
-				exit(-1);
-			}
-			else if(str[cnt] == ' ')
-				cnt++;
-			
-			n = 0;
-			int mul = 1;
-
-			while (eleCnt > 0) {
-				n += (eleNum[eleCnt - 1] - '0') * mul;
-				eleCnt--;
-				mul *= 10;
-			}
-
-			if (n > 10 || arrCnt > 30) {
-				printf("Wrong Input!\n");
-				exit(-1);
-			}
-
-			arr[arrCnt++] = n;
-			HInsert(&heap, n);
+		if (arrCnt == -1) {
+			printf("Wrong Input!\n");
+			exit(-1);
 		}
 
 		for (i = 0; i < arrCnt; i++) {
