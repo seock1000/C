@@ -5,7 +5,7 @@
 
 int FindMax(int arr[], int n) {
 	int max = arr[0];
-	
+
 	for (int i = 0; i <= n; i++) {
 		if (max < arr[i])
 			max = arr[i];
@@ -107,18 +107,19 @@ int main() {
 
 	if ((fp = fopen("input.txt", "r")) == NULL) {
 		printf("File open fail.\n");
+		system("pause");
 		exit(-1);
 	}
 
 	int arr[30];
-	char str[100] = {NULL,};
+	char str[100] = { NULL, };
 	int sequence[100];
 	int n, seqLen;
 	int cnt = 0;
 	int i;
 
 	while (fgets(str, 100, fp) != NULL) {
-		
+
 		int arrCnt = ChangeStringToArray(arr, str);
 
 		if (arrCnt == -1) {
@@ -149,7 +150,7 @@ int main() {
 
 	fclose(fp);
 
-	system("pause > nul");
+	system("pause");
 
 	return 0;
 }

@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{16842680-5682-4138-86d8-f4b383d7e790}</ProjectGuid>
-    <RootNamespace>TinyProblem</RootNamespace>
+    <ProjectGuid>{8ae61382-b24d-4640-8457-caa845cc4cef}</ProjectGuid>
+    <RootNamespace>ThanksGivingDay</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="201731456_염석천_HW1.cpp" />
+    <ClCompile Include="ThanksGivingDay.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
