@@ -16,21 +16,6 @@ void InputList(int arr[], int n, FILE* fp) {
 	}
 }
 
-void BubbleSort(int arr[], int n) {
-	int i, j;
-	int tmp;
-
-	for (i = 0; i < n; i++) {
-		for (j = 1; j < n - i; j++) {
-			if (arr[j] > arr[j - 1]) {
-				tmp = arr[j];
-				arr[j] = arr[j - 1];
-				arr[j - 1] = tmp;
-			}
-		}
-	}
-}
-
 int ComputeAverage(int arr[], int n) {
 	int avg = 0;
 	int i;
@@ -44,37 +29,27 @@ int ComputeAverage(int arr[], int n) {
 int ComputeTotalMovingMoney(int arr[], int avg, int n) {
 
 	int totalMovingMoney = 0;
-	int amountForRich;
+	int tmpCash = 0;
+	int cnt, i;
 
-	if (avg % 10 == 0) amountForRich = avg;
+	if (avg % 10 == 0) cnt = 0;
 	else {
-		avg -= (avg % 10);
-		amountForRich = avg + 10;
+		if ((((avg % 10) * n) % 10) == 0)
+			cnt = (((avg % 10) * n) / 10);
+		else
+			cnt = (((avg % 1) * n) / 10) + 1;
 	}
 
-	BubbleSort(arr, n);
+	avg -= (avg % 10);
 
-	int high = 0;
-	int low = n - 1;
-	for (;;) {
-		if (arr[high] <= amountForRich) break;
-
-		int moneyToAlloc = arr[high] - amountForRich;
-		totalMovingMoney += moneyToAlloc;
-
-		while (moneyToAlloc > 0) {
-			int need = avg - arr[low];
-			if (need <= moneyToAlloc) {
-				arr[low] += need;
-				moneyToAlloc -= need;
-				low++;
+	for (i = 0; i < n; i++) {
+		if (arr[i] >= avg + 10) {
+			if (cnt > 0) {
+				totalMovingMoney += arr[i] - (avg + 10);
+				cnt--;
 			}
-			else {
-				arr[low] += moneyToAlloc;
-				moneyToAlloc = 0;
-			}
+			else totalMovingMoney += arr[i] - avg;
 		}
-		high++;
 	}
 
 	return totalMovingMoney;
