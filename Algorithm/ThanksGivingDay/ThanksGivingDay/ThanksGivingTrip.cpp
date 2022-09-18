@@ -29,7 +29,6 @@ int ComputeAverage(int arr[], int n) {
 int ComputeTotalMovingMoney(int arr[], int avg, int n) {
 
 	int totalMovingMoney = 0;
-	int tmpCash = 0;
 	int cnt, i;
 
 	if (avg % 10 == 0) cnt = 0;
@@ -66,9 +65,7 @@ int main() {
 	int n;
 
 	while (true) {
-		fscanf(fp, "%d", &n);
-		
-		if (n <= 0) break;
+		if (fscanf(fp, "%d", &n) == EOF || n <= 0) break;
 		else if (n > 100) {
 			printf("Wrong Input!\n");
 			exit(-1);
