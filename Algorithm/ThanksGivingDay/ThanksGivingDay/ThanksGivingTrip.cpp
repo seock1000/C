@@ -36,7 +36,7 @@ int ComputeTotalMovingMoney(int arr[], int avg, int n) {
 		if ((((avg % 10) * n) % 10) == 0)
 			cnt = (((avg % 10) * n) / 10);
 		else
-			cnt = (((avg % 1) * n) / 10) + 1;
+			cnt = (((avg % 10) * n) / 10) + 1;
 	}
 
 	avg -= (avg % 10);
