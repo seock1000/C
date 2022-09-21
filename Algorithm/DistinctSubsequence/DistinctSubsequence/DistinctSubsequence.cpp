@@ -9,7 +9,7 @@ void InputString(char str[], char compStr[], FILE* fp) {
 }
 
 int DistinctSubseq(char str[], char compStr[], int len, int compLen) {
-	int** table = (int**)malloc(sizeof(int) * compLen);
+	int** table = (int**)malloc(sizeof(int*) * compLen);
 	for (int row = 0; row < compLen; row++)
 		table[row] = (int*)malloc(sizeof(int) * len);
 
