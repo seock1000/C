@@ -25,74 +25,93 @@ void InputMat(int (*arr)[COL], int n, int m, FILE* fp) {
 	}
 }
 
-// find min index
-int FindMinIDX(Node* table[COL], int curRow, int curCol, int row) {
-	int x = table[(curRow + row - 1) % row][curCol - 1].data;
-	int y = table[curRow][curCol - 1].data;
-	int z = table[(curRow + 1) % row][curCol - 1].data;
+// extend array and add value to array
+int* ExtendArray(int* arrToCpy, int arrLen, int data) {
+	int* arrToExtend;
 
-	int min = x;
-	int minIdx = (curRow + row - 1) % row;
-
-	if (y < min) {
-		min = y;
-		minIdx = curRow;
+	if (arrToCpy == NULL) {
+		arrToExtend = (int*)malloc(sizeof(int));
+		arrToExtend[0] = data;
 	}
 
-	if (z < min) {
-		min = z;
-		minIdx = (curRow + 1) % row;
+	else {
+		arrToExtend = (int*)malloc(sizeof(int) * arrLen);
+		for (int i = 0; i < arrLen - 1; i++) {
+			arrToExtend[i] = arrToCpy[i];
+		}
+		arrToExtend[arrLen - 1] = data;
+	}
+
+	return arrToExtend;
+}
+
+// find min index
+int FindMinIdx(Node* table[COL], int start, int end, int row_size, int curCol) {
+	int min = table[start][curCol].data;
+	int minIdx = start;
+	int i;
+
+	if (end < start) {
+		for (i = start; i < row_size; i++) {
+			if (min > table[i][curCol].data) {
+				min = table[i][curCol].data;
+				minIdx = i;
+			}
+		}
+		for (i = 0; i <= end; i++) {
+			if (min > table[i][curCol].data) {
+				min = table[i][curCol].data;
+				minIdx = i;
+			}
+		}
+	}
+	else {
+		for (i = start; i <= end; i++) {
+			if (min > table[i][curCol].data) {
+				min = table[i][curCol].data;
+				minIdx = i;
+			}
+		}
 	}
 
 	return minIdx;
 }
 
 // find cheapest way
-void FindCheapWay(int (*arr)[COL], int row, int col) {
+int FindCheapWay(int (*arr)[COL], int row, int col) {
 
 	int i, j;
+	int rdata;
 	Node** table = (Node**)malloc(sizeof(Node*) * row);
 
 	for (i = 0; i < row; i++) {
 		table[i] = (Node*)malloc(sizeof(Node) * col);
 		table[i][0].data = arr[i][0];
 
-		table[i][0].seq = (int*)malloc(sizeof(int));
-		table[i][0].seq[0] = arr[i][0];
+		table[i][0].seq = ExtendArray(NULL, 1, arr[i][0]);
 
 	}
 
 	for (i = 1; i < col; i++) {
 		for (j = 0; j < row; j++) {
-			int preIdx = FindMinIDX(table, j, i, row);
+			int minIdx = FindMinIdx(table, ((j + row - 1) % row), ((j + 1) % row), row, i - 1);
 
-			table[j][i].data = table[preIdx][i - 1].data + arr[j][i];
-
-			table[j][i].seq = (int*)malloc(sizeof(int) * (i + 1));
-			for (int t = 0; t < i; t++) {
-				table[j][i].seq[t] = table[preIdx][i - 1].seq[t];
-			}
-			table[j][i].seq[i] = arr[j][i];
-
+			table[j][i].data = table[minIdx][i - 1].data + arr[j][i];
+			table[j][i].seq = ExtendArray(table[minIdx][i - 1].seq, i + 1, arr[j][i]);
 		}
 	}
 
-	int min = table[0][col - 1].data;
-	int minIdx = 0;
-
-	for (i = 1; i < row; i++) {
-		if (min > table[i][col - 1].data) {
-			min = table[i][col - 1].data;
-			minIdx = i;
-		}
-	}
+	int minIdx = FindMinIdx(table, 0, row - 1, row, col - 1);
 
 	for (i = 0; i < col; i++)
 		printf("%d ", table[minIdx][col - 1].seq[i]);
 	printf("\n");
-	printf("%d\n", table[minIdx][col - 1].data);
+
+	rdata = table[minIdx][col - 1].data;
 
 	free(table);
+
+	return rdata;
 }
 
 int main() {
@@ -109,7 +128,7 @@ int main() {
 		fscanf(fp, "%d", &n);
 		fscanf(fp, "%d", &m);
 		InputMat(arr, n, m, fp);
-		FindCheapWay(arr, n, m);
+		printf("%d\n", FindCheapWay(arr, n, m));
 	}
 	
 	fclose(fp);
