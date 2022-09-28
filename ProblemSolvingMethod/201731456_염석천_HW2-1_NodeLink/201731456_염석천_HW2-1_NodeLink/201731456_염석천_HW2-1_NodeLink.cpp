@@ -1,38 +1,32 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-#define ARR_SIZE 5
+#define NUM 5
 
-typedef struct _node {
+struct NODE {
 	int key;
-	int* next;
-} Node;
+	struct NODE* next;
+};
 
-void Link(Node node[]) {
-	for (int i = 0; i < ARR_SIZE - 1; i++)
-		node[i].next = &node[i + 1].key;
-}
+void main() {
+	struct NODE node[NUM];
 
-void PrintArray(Node node[]) {
-	for (int i = 0; i < ARR_SIZE; i++)
-		printf("i=%d key=%d next=%d Add=%d\n", i, node[i].key, node[i].next, &node[i]);
-}
-
-int main() {
-	Node node[ARR_SIZE];
-
-	for (int i = 0; i < ARR_SIZE; i++) {
+	for (int i = 0; i < NUM; i++) {
 		node[i].key = i;
 		node[i].next = NULL;
 	}
 
 	printf("Before linking\n");
-	PrintArray(node);
-	printf("\n");
-	Link(node);
-	printf("After linking\n");
-	PrintArray(node);
-	printf("\n");
+	for (int i = 0; i < NUM; i++) {
+		printf("i=%d key=%d next=%d Add=%d\n", i, node[i].key, node[i].next, &node[i]);
+	}
 
-	return 0;
+	for (int i = 0; i < NUM - 1; i++) {
+		node[i].next = &node[i + 1];
+	}
+
+	printf("\nAfter linking\n");
+	for (int i = 0; i < NUM; i++) {
+		printf("i=%d key=%d next=%d Add=%d\n", i, node[i].key, node[i].next, &node[i]);
+	}
 }
