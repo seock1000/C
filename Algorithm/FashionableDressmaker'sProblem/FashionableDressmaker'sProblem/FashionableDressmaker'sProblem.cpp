@@ -71,5 +71,6 @@ int main() {
 		free(fine);
 		free(seq);
 	}
+
 	return 0;
 }
